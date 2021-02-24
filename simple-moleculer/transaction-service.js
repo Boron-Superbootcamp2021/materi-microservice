@@ -36,7 +36,6 @@ brokerNodeTransaction.createService({
 
             async handler(ctx) {
                 return this.broker.call("transaction.create", ctx.params).then((res) => {
-                    await this.broker.call("users.getUser", { id: ctx.params.id});
                     await this.broker.call("users.getUser", { to: ctx.params.to});
                     await this.broker.call("users.getUser", { from: ctx.params.from});
                     await this.broker.call("loggers.createLog", { action: "Transaction", date: new Date()});
